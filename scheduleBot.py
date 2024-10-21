@@ -31,49 +31,47 @@ for i in  range(6):
     if(num % 2 == 0):
         if num2 == 5 and num // 5 == 0:
             now = schedule1pchis[num % 5]
-            print(now)
+            tomorrow = schedule1pchis[0]
             
             break
         elif num2 == 5 and num // 5:
 
             now = schedule1pznam[num % 5]
-            print(now)
+            tomorrow = schedule1pchis[0]
             
             break
         elif num2 == i:
-            print(schedule1pchis[i])
             now = schedule1pchis[i]
-            print(now)
+            tomorrow = schedule1pchis[i + 1]
             break
         elif num2 == 6:
 
             now = "Віддихай Неділя"
-            print(now)
+            tomorrow = schedule1pchis[0]
             break  
 
     elif(num % 2 != 0):
         if num2 == 5 and num // 5 == 0:
 
             now = schedule1pchis[num % 5]
-            print(now)
-            
+            tomorrow = schedule1pznam[0]
             break
         elif num2 == 5 and num // 5:
 
             now = schedule1pznam[num % 5]
-            print(now)
+            tomorrow = schedule1pznam[0]
             break
         
         elif num2 == i:
 
             now = schedule1pchis[i]
-            print(now)
+            tomorrow = schedule1pznam[i + 1]
             break
             
         elif num2 == 6:
 
             now = "Віддихай Неділя"
-            print(now)
+            tomorrow = schedule1pznam[0]
             break  
 print(now)
 
@@ -86,8 +84,11 @@ bot.set_my_commands([
 ])
 
 @bot.message_handler(commands=['schedule'])
-def send_welcome(message):
-    bot.reply_to(message, now)
+def send_schedule(message):
+    bot.reply_to(message, "Ось розклад на сьогодні")
+    bot.send_message(message.chat.id, now)
+    bot.send_message(message.chat.id, "Ось розклад на завтра")
+    bot.send_message(message.chat.id, tomorrow)
     
 @bot.message_handler(commands=['start'])
 def send_welcome(message):
